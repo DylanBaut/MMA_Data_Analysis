@@ -8,8 +8,8 @@ import time
 from multiprocessing import Pool, Manager 
 import csv
 from concurrent.futures import ThreadPoolExecutor
-
-
+from inspect import getmembers
+import random
 
 def get_second_num(raw):
     new = raw.text.split()
@@ -19,40 +19,6 @@ def get_first_num(raw):
     new = raw.text.split()
     return new[0]
 
-def init_processes(a,b,c,d,e,f,g,h,i, j,k,l,m,n,o,p):
-    global Awins
-    Awins = a
-    global opponentA
-    opponentA = b
-    global method
-    method = c
-    global totalStrikesAttA
-    totalStrikesAttA = d
-    global totalStrikesLandA
-    totalStrikesLandA = e
-    global TDA
-    TDA = f
-    global CtrlTimeA
-    CtrlTimeA = g
-    global significantStrikesA
-    significantStrikesA = h
-    global KDA
-    KDA = i
-
-    global opponentB
-    opponentB = j
-    global totalStrikesAttB
-    totalStrikesAttB = k
-    global totalStrikesLandB
-    totalStrikesLandB = l
-    global TDB
-    TDB = m
-    global CtrlTimeB
-    CtrlTimeB = n
-    global significantStrikesB
-    significantStrikesB = o
-    global KDB
-    KDB = p
 
 def get_links():
     links =[]
@@ -60,14 +26,14 @@ def get_links():
     website = f"{base}/statistics/events/completed"
     result3 = requests.get(website)
     content3 = result3.text
-    soup3 = BeautifulSoup(content3, "html.parser")
+    soup3 = BeautifulSoup(content3, "lxml")
     eventBox = soup3.find('table', class_="b-statistics__table-events")
 
     eventslinks = [link['href'] for link in eventBox.find_all('a', attrs={'class':'b-link b-link_style_black'} )]
     for event in eventslinks:
         result2 = requests.get(event)
         content2 = result2.text
-        soup2 = BeautifulSoup(content2, "html.parser")
+        soup2 = BeautifulSoup(content2, "lxml")
         box = soup2.find('tbody', class_="b-fight-details__table-body")
         rows = box.find_all('tr', attrs={'class':'b-fight-details__table-row b-fight-details__table-row__hover js-fight-details-click'} )
         for row in rows:
@@ -76,9 +42,14 @@ def get_links():
 
 
 def get_response(url):
+    dataList =[]
+
     result = requests.get(url)
+    if(result.status_code==429):
+        time.sleep(0.1)
+        return get_response(url)
     content = result.text
-    soup = BeautifulSoup(content, "html.parser")
+    soup = BeautifulSoup(content, "lxml")
     
     totalStrikesAt = soup.select_one(".js-fight-section .b-fight-details__table-col:nth-child(5) .b-fight-details__table-text:nth-child(1)")
     TDAt = soup.select_one(".js-fight-section .b-fight-details__table-col:nth-child(6) .b-fight-details__table-text:nth-child(1)")
@@ -94,72 +65,55 @@ def get_response(url):
     KDBt = soup.select_one(".js-fight-section .l-page_align_left+ .b-fight-details__table-col .b-fight-details__table-text+ .b-fight-details__table-text")
     opponentBt = soup.select_one(".js-fight-section .b-fight-details__table-text+ .b-fight-details__table-text .b-link_style_black")
     methodt = soup.select_one(".b-fight-details__label+ i")
-
     opponentAdiv = soup.select_one(".b-fight-details__person:nth-child(1)")
-    winLoss = opponentAdiv.find('i')
-    if(winLoss.text.strip()=="W"):
-        Awins.append(1)
-    else:
-        Awins.append(0)
-    
-    totalStrikesAttA.append(get_second_num(totalStrikesAt))
-    totalStrikesLandA.append(get_first_num(totalStrikesAt))
-    TDA.append(get_first_num(TDAt))
-    CtrlTimeA.append(CtrlTimeAt.text.strip())
-    significantStrikesA.append(get_first_num(significantStrikesAt))
-    KDA.append(KDAt.text.strip())
-    opponentA.append(opponentAt.text.strip())
-    
-    totalStrikesAttB.append(get_second_num(totalStrikesBt))
-    totalStrikesLandB.append(get_first_num(totalStrikesBt))
-    TDB.append(get_first_num(TDBt))
-    CtrlTimeB.append(CtrlTimeBt.text.strip())
-    significantStrikesB.append(get_first_num(significantStrikesBt))
-    KDB.append(KDBt.text.strip())
-    opponentB.append(opponentBt.text.strip())
+    #if(opponentAdiv is None):
+    #    print(getmembers(result))
+    #    print(result.status_code)
 
+    winLoss = opponentAdiv.find('i')            
+    if(winLoss.text.strip()=="W"):
+        dataList.append(1)
+    else:
+        dataList.append(0)
+    
     methodWords = methodt.text.split()
     if(methodWords[0]== "KO/TKO"):
-        method.append(0)
+        dataList.append(0)
     elif(methodWords[0]== "Submission"):
-        method.append(1)
+        dataList.append(1)
     elif(methodWords[0]=="Decision"):
         if(methodWords[2]=="Unanimous"):
-            method.append(2)
+            dataList.append(2)
         else:
-            method.append(3)#split
+            dataList.append(3)#split
     else:
-        method.append(4)#DQ/NC
+        dataList.append(4)#DQ/NC
+
+    dataList.append(opponentAt.text.strip())
+    dataList.append(get_second_num(totalStrikesAt))
+    dataList.append(get_first_num(totalStrikesAt))
+    dataList.append(get_first_num(TDAt))
+    dataList.append(CtrlTimeAt.text.strip())
+    dataList.append(get_first_num(significantStrikesAt))
+    dataList.append(KDAt.text.strip())
+    
+    dataList.append(opponentBt.text.strip())
+    dataList.append(get_second_num(totalStrikesBt))
+    dataList.append(get_first_num(totalStrikesBt))
+    dataList.append(get_first_num(TDBt))
+    dataList.append(CtrlTimeBt.text.strip())
+    dataList.append(get_first_num(significantStrikesBt))
+    dataList.append(KDBt.text.strip())
+    return dataList
     
 
 def main():
     start_time = time.time()
     linkList = get_links()
-    cores = multiprocessing.cpu_count()
-    manager = Manager()
-
-    Awins = manager.list()
-    opponentA = manager.list()
-    method = manager.list()
-    totalStrikesAttA = manager.list()
-    totalStrikesLandA = manager.list()
-    TDA = manager.list()
-    CtrlTimeA = manager.list()
-    significantStrikesA = manager.list()     
-    KDA =manager.list()
-
-    opponentB = manager.list()
-    totalStrikesAttB = manager.list()
-    totalStrikesLandB = manager.list()
-    TDB = manager.list()
-    CtrlTimeB = manager.list()
-    significantStrikesB = manager.list()     
-    KDB =manager.list()
     
-    with ThreadPoolExecutor(max_workers=15, initializer=init_processes, initargs=(Awins,opponentA,method,totalStrikesAttA,totalStrikesLandA,TDA,CtrlTimeA,significantStrikesA,KDA, opponentB,totalStrikesAttB,totalStrikesLandB,TDB,CtrlTimeB,significantStrikesB,KDB)) as p:
-        p.map(get_response, linkList)
+    with ThreadPoolExecutor(max_workers=15) as p:
+        rows= p.map(get_response, linkList)
 
-    rows = zip(Awins, method, opponentA, totalStrikesAttA, totalStrikesLandA,TDA,CtrlTimeA,significantStrikesA,KDA, opponentB, totalStrikesAttB, totalStrikesLandB,TDB,CtrlTimeB,significantStrikesB,KDB)
     with open('UFC.csv', "w") as f:
         writer = csv.writer(f)
         writer.writerow(['Opponent A Wins','method','Opponent A','Total Strikes Attempted (A)','Total Strikes Landed (A)', 'Takedowns (A)', 
