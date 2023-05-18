@@ -7,6 +7,8 @@ import multiprocessing
 import time
 from multiprocessing import Pool, Manager 
 import csv
+from concurrent.futures import ThreadPoolExecutor
+
 
 
 def get_second_num(raw):
@@ -131,7 +133,6 @@ def get_response(url):
     
 
 def main():
-    print
     start_time = time.time()
     linkList = get_links()
     cores = multiprocessing.cpu_count()
@@ -154,8 +155,8 @@ def main():
     CtrlTimeB = manager.list()
     significantStrikesB = manager.list()     
     KDB =manager.list()
-
-    with Pool(int(cores/2), initializer=init_processes, initargs=(Awins,opponentA,method,totalStrikesAttA,totalStrikesLandA,TDA,CtrlTimeA,significantStrikesA,KDA, opponentB,totalStrikesAttB,totalStrikesLandB,TDB,CtrlTimeB,significantStrikesB,KDB)) as p:
+    
+    with ThreadPoolExecutor(max_workers=15, initializer=init_processes, initargs=(Awins,opponentA,method,totalStrikesAttA,totalStrikesLandA,TDA,CtrlTimeA,significantStrikesA,KDA, opponentB,totalStrikesAttB,totalStrikesLandB,TDB,CtrlTimeB,significantStrikesB,KDB)) as p:
         p.map(get_response, linkList)
 
     rows = zip(Awins, method, opponentA, totalStrikesAttA, totalStrikesLandA,TDA,CtrlTimeA,significantStrikesA,KDA, opponentB, totalStrikesAttB, totalStrikesLandB,TDB,CtrlTimeB,significantStrikesB,KDB)
