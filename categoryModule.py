@@ -1,0 +1,18 @@
+opponentA =[]
+opponentB =[]
+method = []
+Awins = []
+
+totalStrikesAttA = []
+totalStrikesLandA = []
+TDA = []
+CtrlTimeA = []
+significantStrikesA = []
+KDA =[]
+
+totalStrikesAttB = []
+totalStrikesLandB = []
+TDB = []
+CtrlTimeB = []
+significantStrikesB = []
+KDB = []
