@@ -143,6 +143,12 @@ def get_response(url):
         if(details is not None):
             for detail in details:
                 dataList.append(get_decision(detail)[0] +' '+ get_decision(detail)[1])
+        else:
+            for i in range(3):
+                dataList.append('--')
+    else:
+        for i in range(3):
+             dataList.append('--')
     
     return dataList
     
@@ -155,20 +161,20 @@ def main():
         rows= p.map(get_response, linkList)
     with open('UFC.csv', "w") as f:
         writer = csv.writer(f)
-        writer.writerow(['Number of Rounds','Opponent A Wins','Method',
-                         'Opponent A','Total Strikes Attempted (A)',
-                         'Round 1 Sig Strikes Attempted (A)','Round 1 Sig Strikes Landed (A)','Round 1 KD (A)','Round 1 TD (A)', 'Round 1 Sub Attempts (A)','Round 1 Ctrl Time (A)', 'Round 1 Head Strikes (A)',
-                         'Round 2 Sig Strikes Attempted (A)','Round 2 Sig Strikes Landed (A)','Round 2 KD (A)','Round 2 TD (A)', 'Round 2 Sub Attempts (A)','Round 2 Ctrl Time (A)', 'Round 2 Head Strikes (A)',
-                         'Round 3 Sig Strikes Attempted (A)','Round 3 Sig Strikes Landed (A)','Round 3 KD (A)','Round 3 TD (A)', 'Round 3 Sub Attempts (A)','Round 3 Ctrl Time (A)', 'Round 3 Head Strikes (A)',
-                         'Round 4 Sig Strikes Attempted (A)','Round 4 Sig Strikes Landed (A)','Round 4 KD (A)','Round 4 TD (A)', 'Round 4 Sub Attempts (A)','Round 4 Ctrl Time (A)', 'Round 4 Head Strikes (A)',
-                         'Round 5 Sig Strikes Attempted (A)','Round 5 Sig Strikes Landed (A)','Round 5 KD (A)','Round 5 TD (A)', 'Round 5 Sub Attempts (A)','Round 5 Ctrl Time (A)', 'Round 5 Head Strikes (A)',
-                         'Opponent B','Total Strikes Attempted (B)',
-                         'Round 1 Sig Strikes Attempted (B)','Round 1 Sig Strikes Landed (B)','Round 1 KD (B)','Round 1 TD (B)', 'Round 1 Sub Attempts (B)','Round 1 Ctrl Time (B)', 'Round 1 Head Strikes (B)',
-                         'Round 2 Sig Strikes Attempted (B)','Round 2 Sig Strikes Landed (B)','Round 2 KD (B)','Round 2 TD (B)', 'Round 2 Sub Attempts (B)','Round 2 Ctrl Time (B)', 'Round 2 Head Strikes (B)',
-                         'Round 3 Sig Strikes Attempted (B)','Round 3 Sig Strikes Landed (B)','Round 3 KD (B)','Round 3 TD (B)', 'Round 3 Sub Attempts (B)','Round 3 Ctrl Time (B)', 'Round 3 Head Strikes (B)',
-                         'Round 4 Sig Strikes Attempted (B)','Round 4 Sig Strikes Landed (B)','Round 4 KD (B)','Round 4 TD (B)', 'Round 4 Sub Attempts (B)','Round 4 Ctrl Time (B)', 'Round 4 Head Strikes (B)',
-                         'Round 5 Sig Strikes Attempted (B)','Round 5 Sig Strikes Landed (B)','Round 5 KD (B)','Round 5 TD (B)', 'Round 5 Sub Attempts (B)','Round 5 Ctrl Time (B)', 'Round 5 Head Strikes (B)',
-                         'Decision1','Decision2','Decision3', 
+        writer.writerow(['Number_of_Rounds','Opponent_A_Wins','Method',
+                        'Opponent_A','Total_Strikes_Attempted_(A)',
+                        'Round_1_Sig_Strikes_Attempted_(A)','Round_1_Sig_Strikes_Landed_(A)','Round_1_KD_(A)','Round_1_TD_(A)','Round_1_Sub_Attempts_(A)','Round_1_Ctrl_Time_(A)','Round_1_Head_Strikes_(A)',
+                        'Round_2_Sig_Strikes_Attempted_(A)','Round_2_Sig_Strikes_Landed_(A)','Round_2_KD_(A)','Round_2_TD_(A)','Round_2_Sub_Attempts_(A)','Round_2_Ctrl_Time_(A)','Round_2_Head_Strikes_(A)',
+                        'Round_3_Sig_Strikes_Attempted_(A)','Round_3_Sig_Strikes_Landed_(A)','Round_3_KD_(A)','Round_3_TD_(A)','Round_3_Sub_Attempts_(A)','Round_3_Ctrl_Time_(A)','Round_3_Head_Strikes_(A)',
+                        'Round_4_Sig_Strikes_Attempted_(A)','Round_4_Sig_Strikes_Landed_(A)','Round_4_KD_(A)','Round_4_TD_(A)','Round_4_Sub_Attempts_(A)','Round_4_Ctrl_Time_(A)','Round_4_Head_Strikes_(A)',
+                        'Round_5_Sig_Strikes_Attempted_(A)','Round_5_Sig_Strikes_Landed_(A)','Round_5_KD_(A)','Round_5_TD_(A)','Round_5_Sub_Attempts_(A)','Round_5_Ctrl_Time_(A)','Round_5_Head_Strikes_(A)',
+                        'Opponent_B','Total_Strikes_Attempted_(B)',
+                        'Round_1_Sig_Strikes_Attempted_(B)','Round_1_Sig_Strikes_Landed_(B)','Round_1_KD_(B)','Round_1_TD_(B)','Round_1_Sub_Attempts_(B)','Round_1_Ctrl_Time_(B)','Round_1_Head_Strikes_(B)',
+                        'Round_2_Sig_Strikes_Attempted_(B)','Round_2_Sig_Strikes_Landed_(B)','Round_2_KD_(B)','Round_2_TD_(B)','Round_2_Sub_Attempts_(B)','Round_2_Ctrl_Time_(B)','Round_2_Head_Strikes_(B)',
+                        'Round_3_Sig_Strikes_Attempted_(B)','Round_3_Sig_Strikes_Landed_(B)','Round_3_KD_(B)','Round_3_TD_(B)','Round_3_Sub_Attempts_(B)','Round_3_Ctrl_Time_(B)','Round_3_Head_Strikes_(B)',
+                        'Round_4_Sig_Strikes_Attempted_(B)','Round_4_Sig_Strikes_Landed_(B)','Round_4_KD_(B)','Round_4_TD_(B)','Round_4_Sub_Attempts_(B)','Round_4_Ctrl_Time_(B)','Round_4_Head_Strikes_(B)',
+                        'Round_5_Sig_Strikes_Attempted_(B)','Round_5_Sig_Strikes_Landed_(B)','Round_5_KD_(B)','Round_5_TD_(B)','Round_5_Sub_Attempts_(B)','Round_5_Ctrl_Time_(B)','Round_5_Head_Strikes_(B)',
+                        'Decision1','Decision2','Decision3'
                          ])
         for row in rows:
             if(row[0]!='Error_skip'):
