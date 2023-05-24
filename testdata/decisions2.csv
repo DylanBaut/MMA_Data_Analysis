@@ -1,0 +1,29 @@
+Winner,Opponent_A,Opponent_B,Rd1A,Rd2A,Rd3A,Rd4A,Rd5A,Rd1B,Rd2B,Rd3B,Rd4B,Rd5B,Rd1C,Rd2C,Rd3C,Rd4C,Rd5C,Media_score_ratio_of_agreement,Rd1_Fans,Rd2_Fans,Rd3_Fans,Rd4_Fans,Rd5_Fans
+Walker,Johnny Walker,Anthony Smith,1,1,1,--,--,1,1,1,--,--,1,-1,1,--,--,1.0,0.955,0.254,1.15
+Williams,Karl Williams,Chase Sherman,1,1,1,--,--,1,1,1,--,--,1,-1,1,--,--,1.0,0.914,-0.392,-0.044
+Silva de Andrade,Douglas Silva de Andrade,Cody Stamann,1,1,-1,--,--,1,1,-1,--,--,1,1,-1,--,--,0.714,0.531,0.698,-1.094
+Bohm,Mandy Bohm,Ji Yeon Kim,1,-1,-1,--,--,-1,-1,-1,--,--,1,-1,-1,--,--,0.091,-0.696,0.033,0.043
+Sterling,Aljamain Sterling,Henry Cejudo,1,-1,-1,1,-1,1,-1,-1,1,1,1,1,-1,1,-1,0.913,0.904,-0.33,-0.167,0.826,-0.89
+Muhammad,Belal Muhammad,Gilbert Burns,1,1,1,1,1,1,1,1,-1,1,1,1,1,1,-1,1.0,0.901,0.388,0.868,0.572,0.73
+Evloev,Movsar Evloev,Diego Lopes,-1,1,1,--,--,1,1,-1,--,--,1,1,1,--,--,1.0,-0.677,1.056,0.087
+Jourdain,Charles Jourdain,Kron Gracie,1,1,1,--,--,1,1,1,--,--,1,1,1,--,--,1.0,0.999,1.032,1.046
+Williams,Khaos Williams,Rolando Bedoya,1,1,-1,--,--,1,1,-1,--,--,-1,-1,-1,--,--,0.533,0.415,-0.25,-0.929
+de Lima,Marcos Rogério de Lima,Waldo Cortes-Acosta,1,1,-1,--,--,1,1,-1,--,--,1,1,-1,--,--,1.0
+Waters,Trey Waters,Josh Quinlan,1,1,1,--,--,1,1,1,--,--,1,1,1,--,--,1.0
+Buday,Martin Buday,Jake Collier,-1,1,1,--,--,-1,1,1,--,--,-1,1,1,--,--,0.8
+Durden,Cody Durden,Charles Johnson,1,1,1,--,--,1,1,1,--,--,1,1,1,--,--,1.0
+Horth,Jamey-Lyn Horth,Hailey Cowan,1,-1,1,--,--,1,-1,1,--,--,1,-1,1,--,--,0.692,0.63,-0.826,0.217
+Lucindo,Iasmin Lucindo,Brogan Walker,1,1,1,--,--,1,1,1,--,--,1,1,1,--,--,1.0
+Wells,Jeremiah Wells,Matthew Semelsberger,1,1,1,--,--,1,1,1,--,--,-1,-1,1,--,--,0.938,-0.68,-0.511,0.949
+Dumont,Norma Dumont,Karol Rosa,1,1,-1,--,--,1,1,-1,--,--,1,1,-1,--,--,0.786,0.9,0.45,-0.975
+Usman,Mohammed Usman,Justin Tafa,-1,1,1,--,--,-1,1,1,--,--,-1,1,1,--,--,0.941,-1.011,0.022,0.372
+Gomis,William Gomis,Francis Marshall,1,1,-1,--,--,1,-1,-1,--,--,1,1,-1,--,--,0.692,0.382,0.603,-1.045
+Holloway,Max Holloway,Arnold Allen,1,-1,1,1,-1,1,1,1,1,-1,1,1,1,1,-1,1.0,0.926,-0.581,0.974,0.723,-0.221
+Murzakanov,Azamat Murzakanov,Dustin Jacoby,1,1,-1,--,--,1,1,-1,--,--,1,1,-1,--,--,1.0,0.976,0.857,-0.976
+Munhoz,Pedro Munhoz,Chris Gutierrez,1,1,1,--,--,1,1,1,--,--,1,1,1,--,--,1.0,1.0,0.0,0.043
+Garcia,Rafa Garcia,Clay Guida,1,1,1,--,--,1,1,1,--,--,1,1,1,--,--,1.0,0.667,0.971,0.94
+Zellhuber,Daniel Zellhuber,Lando Vannata,1,1,1,--,--,2,-1,1,--,--,1,-1,1,--,--,1.0,1.755,-0.96,0.388
+Bolanos,Gaston Bolanos,Aaron Phillips,1,-1,1,--,--,1,1,1,--,--,1,1,1,--,--,0.667,0.974,-0.051,-0.18
+Edwards,Joselyne Edwards,Lucie Pudilova,1,-1,-1,--,--,1,-1,1,--,--,1,-1,1,--,--,0.0,-0.658,-0.963,0.212
+Burns,Gilbert Burns,Jorge Masvidal,-1,1,1,--,--,1,1,1,--,--,1,1,1,--,--,1.0,0.506,1.001,1.064
+Rodriguez,Christian Rodriguez,Raul Rosas Jr.,-1,1,2,--,--,-1,1,1,--,--,-1,1,1,--,--,1.0,-1.059,1.008,1.378
