@@ -92,7 +92,7 @@ def get_response(url):
     if(winLoss.text.strip()=="W"):
         dataList.append(1)
     else:
-        dataList.append(0)
+        dataList.append(0)#loss or draw
 
     decision = False
     methodWords = methodt.text.split()
@@ -176,6 +176,8 @@ def main():
                         'Round_5_Sig_Strikes_Attempted_(B)','Round_5_Sig_Strikes_Landed_(B)','Round_5_KD_(B)','Round_5_TD_(B)','Round_5_Sub_Attempts_(B)','Round_5_Ctrl_Time_(B)','Round_5_Head_Strikes_(B)',
                         'Decision1','Decision2','Decision3'
                          ])
+        
+
         for row in rows:
             if(row[0]!='Error_skip'):
                 writer.writerow(row)
