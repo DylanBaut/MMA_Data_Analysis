@@ -1,5 +1,4 @@
-# PythonScraping
-Python web scraping for UFC website stats 
+# MMA Data Analysis
 
 '''One of the most contentious and seemingly arbitrary aspects of the sport of mixed martial arts is judging decisions. If you're not familiar, every fight is either 3 or 5 rounds, and if a finish isnt achieved within the time limit, 3 judges will have judged each individual round. Each round is based off of a 10 point must system, awarding the chosen winner 10 and the loser less than 10.
 
@@ -7,6 +6,8 @@ Judging has been critisized by fans and fighters alike due to the vagueness of h
 
 Created is python code that web srapes two sites: mmadecisions.com (for decisions/ fan and media scoring) and UFCstats.com (for round by round statistics). These scripts utilizes microprocessing to optimize the time it takes to gether all the information. Then, the combined csv files are converted to a 103x2306 dataframe. This data will be used in a nueral network and other predictive alogorithms.
 '''
+
+Python web scraping for UFC website stats 
 
 Notes:
 (implement multithreading, multiprocessing, asynchronous)
