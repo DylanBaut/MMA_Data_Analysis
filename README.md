@@ -29,3 +29,5 @@ Decisions.py scrapes data from every 5/3 round fight in UFC history with availab
 
 Combine.py appends every decision data row with its corresponding row in UFC stats. (Some names that dont match betwen the two sites were exclude)
 Combine.py operates in 224.40 seconds.
+#Must download requierements.txt
+'pip install -r requirements.txt'
