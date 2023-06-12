@@ -1,1 +1,2 @@
-.venv/lib/python3.11/site-packages/torch/
+.venv
+__pycache__
