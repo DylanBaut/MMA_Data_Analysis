@@ -23,80 +23,79 @@
            <p>UFC Round Judge</p>
           <p style="font-size: 2vw; line-height: 0%;font-family:'UFCfonthollow'; padding: 5px;">by Dylan Bautista</p>
         </div>
-        <div id="center_rect">
-            <div class="data" id="opp1">
-                <header class="opptitle"><b>Opponent 1:</b></header>
-                <div class="data-row">
-                    <p style="display: inline-block;">Significant Strikes Attempted</p>
-                    <input type="text" name="sigAtt1">
+        <form method="post">
+            <div id="center_rect">
+                <div class="data" id="opp1">
+                    <header class="opptitle"><b>Opponent 1:</b></header>
+                    <div class="data-row">
+                        <p style="display: inline-block;">Significant Strikes Attempted</p>
+                        <input type="text" name="sigAtt1">
+                    </div>
+                    <div class="data-row">
+                        <p> Significant Strikes Landed</p>
+                        <input type="text" name="sigLand1">
+                    </div>
+                    <div class="data-row">
+                        <p>Knockdowns</p>
+                        <input type="text" name="KD1">
+                    </div>
+                    <div class="data-row">
+                        <p>Takedowns</p>
+                        <input type="text" name="TD1">
+                    </div>
+                    <div class="data-row">
+                        <p>Submission Attempts</p>
+                        <input type="text" name="sub1">
+                    </div>
+                    <div class="data-row">
+                        <p>Control Time</p>
+                        <input type="text" name="ctrl1">
+                    </div>
+                    <div class="data-row">
+                        <p>Head Strikes</p>
+                        <input type="text" name="head1">
+                    </div>
                 </div>
-                <div class="data-row">
-                    <p> Significant Strikes Landed</p>
-                    <input type="text" name="sigLand1">
+                <div class="middle-section">
+                    <header id="results"><b>Enter Round<br> Information</b></header>
+                    <input type="submit" value="Submit" id="submit-button">
                 </div>
-                <div class="data-row">
-                    <p>Knockdowns</p>
-                    <input type="text" name="KD1">
-                </div>
-                <div class="data-row">
-                    <p>Takedowns</p>
-                    <input type="text" name="TD1">
-                </div>
-                <div class="data-row">
-                    <p>Submission Attempts</p>
-                    <input type="text" name="sub1">
-                </div>
-                <div class="data-row">
-                    <p>Control Time</p>
-                    <input type="text" name="ctrl1">
-                </div>
-                <div class="data-row">
-                    <p>Head Strikes</p>
-                    <input type="text" name="head1">
+                <div class="data" id="opp2">
+                    <header class="opptitle"><b>Opponent 2:</b></header>
+                    <div class="data-row">
+                        <p>Significant Strikes Attempted</p>
+                        <input type="text" name="sigAtt2">
+                    </div>
+                    <div class="data-row">
+                        <p>Significant Strikes Landed</p>
+                        <input type="text" name="sigLand2">
+                    </div>
+                    <div class="data-row">
+                        <p>Knockdowns</p>
+                        <input type="text" name="KD2">
+                    </div>
+                    <div class="data-row">
+                        <p>Takedowns</p>
+                        <input type="text" name="TD2">
+                    </div>
+                    <div class="data-row">
+                        <p>Submission Attempts</p>
+                        <input type="text" name="sub2">
+                    </div>
+                    <div class="data-row">
+                        <p>Control Time</p>
+                        <input type="text" name="ctrl2">
+                    </div>
+                    <div class="data-row">
+                        <p>Head Strikes</p>
+                        <input type="text" name="head2">
+                    </div>
                 </div>
             </div>
-            <div class="middle-section">
-                <header id="results"><b>Enter Round<br> Information</b></header>
-                <input type="submit" value="Submit" id="submit-button">
-            </div>
-            <div class="data" id="opp2">
-                <header class="opptitle"><b>Opponent 2:</b></header>
-                <div class="data-row">
-                    <p>Significant Strikes Attempted</p>
-                    <input type="text" name="sigAtt2">
-                </div>
-                <div class="data-row">
-                    <p>Significant Strikes Landed</p>
-                    <input type="text" name="sigLand2">
-                </div>
-                <div class="data-row">
-                    <p>Knockdowns</p>
-                    <input type="text" name="KD2">
-                </div>
-                <div class="data-row">
-                    <p>Takedowns</p>
-                    <input type="text" name="TD2">
-                </div>
-                <div class="data-row">
-                    <p>Submission Attempts</p>
-                    <input type="text" name="sub2">
-                </div>
-                <div class="data-row">
-                    <p>Control Time</p>
-                    <input type="text" name="ctrl2">
-                </div>
-                <div class="data-row">
-                    <p>Head Strikes</p>
-                    <input type="text" name="head2">
-                </div>
-            </div>
-        </div>
+        </form>
         <div id="image-div">
             <img id="bottom-image" src="{{url_for('static', filename='Images/khabibSmoke.png')}}" alt="Image of Khabib Nurmagomedov"/>
         </div>      
-
-        <div class="bottom-bar">
-        </div>
 
     </body>
 </html>
