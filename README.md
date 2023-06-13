@@ -31,3 +31,16 @@ Combine.py appends every decision data row with its corresponding row in UFC sta
 Combine.py operates in 224.40 seconds.
 #Must download requierements.txt
 'pip install -r requirements.txt'
+
+Neural Network:
+Accuracy 0.8200549483299255 Linear(7, 12), ReLU(), Linear(12, 7), ReLU(), Linear(7, 7), CrossEntropyLoss(), optim.Adam(lr=0.001)
+
+Web App structure:
+- Welcome page,two options:
+    -  judge-trained model
+    -  judge/fan-traiend model
+- work page:
+    - enter 14 stats in field boxes: gived percentages of each scoring outcome, with most likely highlighted in center
+    - Allow for search feature of "Was this a robbery?"
+        - search option for every single UFC fight, show predicted scores for each round (with percentages)
+        - shows if robbery or not
