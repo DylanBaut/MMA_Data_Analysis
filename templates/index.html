@@ -7,6 +7,8 @@
         <meta name="newport" content="width=device width, initial scale=1.0">
         <title>MMA Round Judge</title>
         <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="{{url_for('static', filename='idx.js')}}"></script>
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,7 +51,7 @@
                     </div>
                     <div class="data-row">
                         <p>Control Time</p>
-                        <input type="text" name="ctrl1">
+                        <input type="text" name="ctrl1" >
                     </div>
                     <div class="data-row">
                         <p>Head Strikes</p>
@@ -57,8 +59,101 @@
                     </div>
                 </div>
                 <div class="middle-section">
-                    <header id="results"><b>Enter Round<br> Information</b></header>
+                    {%with labels = get_flashed_messages(category_filter=["label"])%}
+                    {% if labels %}
+                    {%for message in labels%}
+                        <header id="results"><b> {{message}}</b></header>
+                    {%endfor%}
+                    {% endif %}
+                    {% endwith %}
                     <input type="submit" value="Submit" id="submit-button">
+                    <div class="radio-toolbar-3">
+                        <input type="radio" id="Judgeid" name="modelSel" value="Judge" checked="checked">
+                        <label for="Judgeid">Judge-trained <br>Model</label>
+                        <input type="radio" id="Fansid" name="modelSel" value="Fans">
+                        <label for="Fansid">Judge/Fans-trained <br>Model</label>
+                    </div>
+                    <div id="explanation-div">
+                        <p id="modelJudge" class="desc"> This option uses a neural network model trained with the judging scores for all past scored UFC rounds. It is trained to predict up to an 80 percent accuracy what a judge is most likely to score, not what is necessarily correct.</p>
+                        <p id="modelFans" class="desc">This option uses a neural network model trained with the judging scores for all past scored UFC rounds, with weights linked to the agreement with fan scores on mmadecisions.com site. Therefore, this prediction should be subjectively 'more correct', and thus matches only up to a 76 percent of what a judge is likely to score.</p>        
+                    </div>
+                    <div id="probabilities">
+                        
+                        <div class="probabilityRow">
+                            {%with tie = get_flashed_messages(category_filter=["10-10"])%}
+                            {% if tie %}
+                            {%for message in tie%}
+                            <div class="pair">
+                                <div class="prob">
+                                    <b>10-10:</b><span id="prog1"> {{message}}%</span> 
+                                </div>
+                                <div class="outer-bar">
+                                    <div id="progress1" class="bar"></div>
+                                </div>
+                            </div>
+                            {%endfor%}
+                            {% endif %}
+                            {% endwith %}
+                            {%with aOne = get_flashed_messages(category_filter=["10-9"])%}
+                            {% if aOne %}
+                            {%for message in aOne%}
+                            <div class="pair">
+                                <div class="prob">
+                                    <b>10-9 A:</b><span id="prog2"> {{message}}%</span> 
+                                </div>
+                                <div class="outer-bar">
+                                    <div id="progress2" class="bar"></div>
+                                </div>
+                            </div>
+                            {%endfor%}
+                            {% endif %}
+                            {% endwith %}
+                            {%with aTwo = get_flashed_messages(category_filter=["10-8"])%}
+                            {% if aTwo %}
+                            {%for message in aTwo%}
+                            <div class="pair">
+                                <div class="prob">
+                                    <b>10-8 A:</b><span id="prog3"> {{message}}%</span> 
+                                </div>
+                                <div class="outer-bar">
+                                    <div id="progress3" class="bar"></div>
+                                </div>
+                            </div>
+                            {%endfor%}
+                            {% endif %}
+                            {% endwith %}
+                        </div>
+                        <div class="probabilityRow">
+                            {%with bOne = get_flashed_messages(category_filter=["9-10"])%}
+                            {% if bOne %}
+                            {%for message in bOne%}
+                            <div class="pair">
+                                <div class="prob">
+                                    <b>9-10 B:</b><span id="prog4"> {{message}}%</span> 
+                                </div>
+                                <div class="outer-bar">
+                                    <div id="progress4" class="bar"></div>
+                                </div>
+                            </div>
+                            {%endfor%}
+                            {% endif %}
+                            {% endwith %}
+                            {%with bTwo = get_flashed_messages(category_filter=["8-10"])%}
+                            {% if bTwo %}
+                            {%for message in bTwo%}
+                            <div class="pair">
+                                <div class="prob">
+                                    <b>8-10 B:</b><span id="prog5"> {{message}}%</span> 
+                                </div>
+                                <div class="outer-bar">
+                                    <div id="progress5" class="bar"></div>
+                                </div>
+                            </div>
+                            {%endfor%}
+                            {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
                 </div>
                 <div class="data" id="opp2">
                     <header class="opptitle"><b>Opponent 2:</b></header>

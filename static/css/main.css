@@ -63,6 +63,7 @@ body{
     margin-bottom: 0;
     padding-bottom: 0;
     box-shadow: inset 0em -2vh 2vh black;
+    pointer-events: none;
 }
 #opp1{
     border-right: 6px solid grey;
@@ -89,9 +90,12 @@ body{
 
 }
 #results{
+    display: flex;
+    flex-direction: column;
     vertical-align: top;    
     font-family: 'Playfair Display', serif;
     font-size: 2vw;
+    align-items: center;
 }
 .middle-section{
     height:100%;
@@ -101,4 +105,103 @@ body{
 #submit-button{
     margin: 5%;
     align-self: center;
+    background-color: darkslategray; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'Playfair Display', serif;
+      
+}
+.radio-toolbar-3 {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.19);
+    height: 6vh;
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  
+  .radio-toolbar-3 label {
+    width: 100%;
+    display: inline-block;
+    background-color: #FFFFFF;
+    margin-left: -30px;
+    padding: 10px 20px;
+    font-size: 0.75em;
+    text-align: center;
+  }
+  
+  .radio-toolbar-3 label:hover {
+    background-color: #B4B4B4;
+  }
+  
+  .radio-toolbar-3 input[type="radio"]:checked+label {
+    background-color: #DAA521;
+    color: white;
+  }
+  
+  input[type="radio"] {
+    visibility: hidden;
+  }
+  #modelJudge{
+    font-size: 1em;
+    margin: 0;
+  }
+  #modelFans{
+    font-size: 1em;
+    margin: 0;
+  }
+
+  #explanation-div{
+    width: 24vw;
+    margin-top: 6px;
+  }
+  #probabilities{
+    display: flex;
+    flex-direction: column;
+  }
+  .probabilityRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .prob{
+    background-color: lightgrey;
+    margin: 5px;
+    box-shadow: 3px 3px darkslategray;
+    padding: 2px;  
+}
+.pair{
+    display: flex;
+    flex-direction: row;
+    align-items: center;    
+}
+.bar{
+    background-color: darkslategray;
+    width: 0%;
+}
+.outer-bar{
+    width: 50px;
+    height: 50%;
+    background-color: lightgrey;
+    vertical-align:middle;
+}
+#progress1{
+    height: 100%;
+}
+#progress2{
+    height: 100%;
+}
+#progress3{
+    height: 100%;
+}
+#progress4{
+    height: 100%;
+}
+#progress5{
+    height: 100%;
 }
