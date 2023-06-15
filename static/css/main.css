@@ -159,6 +159,7 @@ body{
   #explanation-div{
     width: 24vw;
     margin-top: 6px;
+    align-self: center;
   }
   #probabilities{
     display: flex;
@@ -204,4 +205,10 @@ body{
 }
 #progress5{
     height: 100%;
+}
+.invalid {
+    border-color: red;
+}
+.valid{
+    border-color: black;
 }

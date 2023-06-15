@@ -87,4 +87,89 @@ $(document).ready(function () {
             }
         }
     }
+
+    const submit = document.getElementById("submit-button");
+    submit.addEventListener("click", validate);
+
+    function validate(e) {
+
+        const sigAtt1 = document.getElementById("sigAtt1")
+        const sigLand1 = document.getElementById('sigLand1')
+        const KD1 = document.getElementById('KD1')
+        const TD1 =document.getElementById('TD1')
+        const sub1 = document.getElementById('sub1')
+        const ctrl1 = document.getElementById('ctrl1')
+        const head1 = document.getElementById('head1')
+
+        const sigAtt2 = document.getElementById('sigAtt2')
+        const sigLand2 = document.getElementById('sigLand2')
+        const KD2 = document.getElementById('KD2')
+        const TD2 = document.getElementById('TD2')
+        const sub2 = document.getElementById('sub2')
+        const ctrl2 = document.getElementById('ctrl2')
+        const head2 = document.getElementById('head2')
+        
+        sigAtt1.classList.remove("invalid");
+        sigLand1.classList.remove("invalid");
+        KD1.classList.remove("invalid");
+        TD1.classList.remove("invalid");
+        sub1.classList.remove("invalid");
+        ctrl1.classList.remove("invalid");
+        head1.classList.remove("invalid");
+        sigLand2.classList.remove("invalid");
+        KD2.classList.remove("invalid");
+        TD2.classList.remove("invalid");
+        sub2.classList.remove("invalid");
+        ctrl2.classList.remove("invalid");
+        head2.classList.remove("invalid");
+        
+        let valid = true;
+        let alert = ''
+        console.log(sigAtt1)
+        
+        if (parseInt(sigAtt1.value) < parseInt(sigLand1.value)) {
+            sigAtt1.classList.add("invalid");
+            sigLand1.classList.add("invalid");
+            alert = alert + "sig strikes landed more than attempted ; "
+            valid = false;
+        }
+        if (parseInt(sigAtt2.value) < parseInt(sigLand2.value)) {
+            console.log(sigAtt2.value < sigLand2.value)
+            sigAtt2.classList.add("invalid");
+            sigLand2.classList.add("invalid");
+            alert = alert + "sig strikes landed more than attempted ; "
+            valid = false;
+        }
+        if (parseInt(sigAtt1.value) < parseInt(head1.valu)) {
+            sigAtt1.classList.add("invalid");
+            head1.classList.add("invalid");
+            alert = alert + "sig head strikes landed more than attempted; "
+            valid = false;
+        }
+        if (parseInt(sigAtt2.value) < parseInt(head2.value)) {
+            console.log(sigAtt2.value < head2.value)
+            sigAtt2.classList.add("invalid");
+            head2.classList.add("invalid");
+            alert = alert + "sig head strikes landed more than attempted; "
+            valid = false;
+        }
+        if (parseInt(sigLand1.value) < parseInt(head1.value)) {
+            sigLand1.classList.add("invalid");
+            head1.classList.add("invalid");
+            alert = alert + "sig head strikes landed more than landed; "
+            valid = false;
+        }
+        if (parseInt(sigLand2.value) < parseInt(head2.value)) {
+            sigLand2.classList.add("invalid");
+            head2.classList.add("invalid");
+            alert = alert + "sig head strikes landed more than landed; "
+            valid = false;
+        }
+
+        if (!valid) { 
+            window.alert(alert)
+            e.preventDefault();
+        }
+        return valid;
+    }
 });

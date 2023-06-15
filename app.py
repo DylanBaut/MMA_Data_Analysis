@@ -26,6 +26,8 @@ def index():
         formData['ctrl2']=request.form['ctrl2']
         formData['head2']=request.form['head2']
         formData['modelSel']=request.form['modelSel']
+
+        
         return redirect(url_for('output'))
     else:
         return render_template("index.html")
