@@ -6,7 +6,7 @@
         <meta name="author" content="Dylan Jude Bautista">
         <meta name="newport" content="width=device width, initial scale=1.0">
         <title>MMA Round Judge</title>
-        <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/search.css')}}">
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="{{url_for('static', filename='idx.js')}}"></script>
 
@@ -22,41 +22,26 @@
     </head>
     <body>
         <div class="topbar">
-           <p>UFC Round Judge</p>
+           <p>UFC Fight Scorer</p>
           <p style="font-size: 2vw; line-height: 0%;font-family:'UFCfonthollow'; padding: 5px;">by Dylan Bautista</p>
         </div>
+        <div class="topbar-nav">
+            <span id="roundJudge">Round Judge</span>
+            <span id="fightScorer">Fight Scorer</span>
+         </div>
         <form method="post">
             <div id="center_rect">
                 <div class="data" id="opp1">
-                    <header class="opptitle"><b>Opponent 1:</b></header>
-                    <div class="data-row">
-                        <p style="display: inline-block;">Significant Strikes Attempted</p>
-                        <input type="number" name="sigAtt1" id="sigAtt1" required min ='0'>
-                    </div>
-                    <div class="data-row">
-                        <p> Significant Strikes Landed</p>
-                        <input type="number" name="sigLand1" id="sigLand1" required min ='0'>
-                    </div>
-                    <div class="data-row">
-                        <p>Knockdowns</p>
-                        <input type="number" name="KD1" id="KD1" required min ='0'>
-                    </div>
-                    <div class="data-row">
-                        <p>Takedowns</p>
-                        <input type="number" name="TD1" id ="TD1" required min ='0'>
-                    </div>
-                    <div class="data-row">
-                        <p>Submission Attempts</p>
-                        <input type="number" name="sub1" id="sub1" required min ='0'>
-                    </div>
-                    <div class="data-row">
-                        <p>Control Time (s)</p>
-                        <input type="number" name="ctrl1" id="ctrl1"  required min ='0' max="300">
-                    </div>
-                    <div class="data-row">
-                        <p>Significant Head Strikes Landed</p>
-                        <input type="number" name="head1" id="head1" required min ='0' >
-                    </div>
+                    <header class="opptitle"><b>Select Your UFC Fight:</b></header>
+                    <div class="options">
+                        <label for="fight-list">Choose from historical UFC bouts:</label> <br>
+                        <select name="fight-list" id="fight-list"> 
+                            <option value="rigatoni">Rigatoni</option> 
+                            <option value="dave">Dave</option> 
+                            <option value="pumpernickel">Pumpernickel</option> 
+                            <option value="reeses">Reeses</option> 
+                        </select>
+                    </div> 
                 </div>
                 <div class="middle-section">
                     {%with labels = get_flashed_messages(category_filter=["label"])%}
@@ -76,84 +61,7 @@
                     <div id="explanation-div">
                         <p id="modelJudge" class="desc"> This option uses a neural network model trained with the judging scores for all past scored UFC rounds. It is trained to predict up to an 80 percent accuracy what a judge is most likely to score, not what is necessarily correct.</p>
                         <p id="modelFans" class="desc">This option uses a neural network model trained with the judging scores for all past scored UFC rounds, with weights linked to the agreement with fan scores on mmadecisions.com site. Therefore, this prediction should be subjectively 'more correct', and thus matches only up to a 76 percent of what a judge is likely to score.</p>        
-                    </div>
-                    <div id="probabilities">
-                        
-                        <div class="probabilityRow">
-                            {%with tie = get_flashed_messages(category_filter=["10-10"])%}
-                            {% if tie %}
-                            {%for message in tie%}
-                            <div class="pair">
-                                <div class="prob">
-                                    <b>10-10:</b><span id="prog1"> {{message}}%</span> 
-                                </div>
-                                <div class="outer-bar">
-                                    <div id="progress1" class="bar"></div>
-                                </div>
-                            </div>
-                            {%endfor%}
-                            {% endif %}
-                            {% endwith %}
-                            {%with aOne = get_flashed_messages(category_filter=["10-9"])%}
-                            {% if aOne %}
-                            {%for message in aOne%}
-                            <div class="pair">
-                                <div class="prob">
-                                    <b>10-9 A:</b><span id="prog2"> {{message}}%</span> 
-                                </div>
-                                <div class="outer-bar">
-                                    <div id="progress2" class="bar"></div>
-                                </div>
-                            </div>
-                            {%endfor%}
-                            {% endif %}
-                            {% endwith %}
-                            {%with aTwo = get_flashed_messages(category_filter=["10-8"])%}
-                            {% if aTwo %}
-                            {%for message in aTwo%}
-                            <div class="pair">
-                                <div class="prob">
-                                    <b>10-8 A:</b><span id="prog3"> {{message}}%</span> 
-                                </div>
-                                <div class="outer-bar">
-                                    <div id="progress3" class="bar"></div>
-                                </div>
-                            </div>
-                            {%endfor%}
-                            {% endif %}
-                            {% endwith %}
-                        </div>
-                        <div class="probabilityRow">
-                            {%with bOne = get_flashed_messages(category_filter=["9-10"])%}
-                            {% if bOne %}
-                            {%for message in bOne%}
-                            <div class="pair">
-                                <div class="prob">
-                                    <b>9-10 B:</b><span id="prog4"> {{message}}%</span> 
-                                </div>
-                                <div class="outer-bar">
-                                    <div id="progress4" class="bar"></div>
-                                </div>
-                            </div>
-                            {%endfor%}
-                            {% endif %}
-                            {% endwith %}
-                            {%with bTwo = get_flashed_messages(category_filter=["8-10"])%}
-                            {% if bTwo %}
-                            {%for message in bTwo%}
-                            <div class="pair">
-                                <div class="prob">
-                                    <b>8-10 B:</b><span id="prog5"> {{message}}%</span> 
-                                </div>
-                                <div class="outer-bar">
-                                    <div id="progress5" class="bar"></div>
-                                </div>
-                            </div>
-                            {%endfor%}
-                            {% endif %}
-                            {% endwith %}
-                        </div>
-                    </div>
+                    </div>        
                 </div>
                 <div class="data" id="opp2">
                     <header class="opptitle"><b>Opponent 2:</b></header>

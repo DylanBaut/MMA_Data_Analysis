@@ -27,7 +27,7 @@ def index():
         formData['head2']=request.form['head2']
         formData['modelSel']=request.form['modelSel']
 
-        
+
         return redirect(url_for('output'))
     else:
         return render_template("index.html")
@@ -128,3 +128,9 @@ def output():
         return redirect(url_for('output'))
     else:
         return render_template("index.html")
+    
+
+@app.route('/fightScorer')
+def fightScorer():
+    print('In fightScorer')
+    return render_template("search.html")

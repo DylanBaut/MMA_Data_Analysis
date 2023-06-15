@@ -86,6 +86,12 @@ body{
 #opp1{
     border-right: 6px solid grey;
     padding-right: 10px;
+    width: 30%;
+    height: 83%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
 }
 #opp2{
     border-left: 6px solid grey;
@@ -94,7 +100,8 @@ body{
 .opptitle{
     font-family: 'Playfair Display', serif;
     width: 100%;
-    font-size: 5vw;
+    font-size: 3.5vw;
+    text-align: center
 }
 .data{
     flex-direction: column;
@@ -116,9 +123,11 @@ body{
     align-items: center;
 }
 .middle-section{
-    height:100%;
+    align-self: self-start;
+    height:35vh;
     display: flex;
     flex-direction: column;
+    justify-content:space-around
 }
 #submit-button{
     margin: 5%;
@@ -129,7 +138,7 @@ body{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 3vh;
     cursor: pointer;
     font-family: 'Playfair Display', serif;
       
@@ -240,4 +249,13 @@ body{
     border-left: 1px solid white;
     margin-left: 0;
     cursor: pointer;
+}
+#fight-list{
+    height: 5vh;
+    margin: 2vh;
+    width: 100%;
+}
+.options{
+    align-items: center;
+    margin: 5vh;
 }

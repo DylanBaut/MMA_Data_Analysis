@@ -172,4 +172,19 @@ $(document).ready(function () {
         }
         return valid;
     }
+
+    const fightScorer = document.getElementById("fightScorer");
+    fightScorer.addEventListener("click", scorerRedir);  
+    function scorerRedir() { 
+        var base_url = window.location.origin;
+        window.location = base_url + "/fightScorer"
+        
+    }
+    const roundJudge = document.getElementById("roundJudge");
+    roundJudge.addEventListener("click", roundRedir);  
+    function roundRedir() { 
+        var base_url = window.location.origin;
+        window.location = base_url
+        
+    }
 });
