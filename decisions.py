@@ -142,6 +142,11 @@ def get_response(url):
             dataList.append('--')
     else:
         dataList.append('--')
+        
+    scoresFull = soup.select('td td td .bottom-cell b')
+    for idx in range(len(scoresFull)):
+        scoresFull[idx]=scoresFull[idx].text.strip()
+    dataList.append(scoresFull)
 
     scorecards =soup.select_one('#scorecards_submitted td')
     if (int(get_first_num(scorecards.select_one('b'))) >= 30):
@@ -182,7 +187,7 @@ def main():
     with open('decisions.csv', "w") as f:
         writer = csv.writer(f)
         writer.writerow(['Winner', 'Opponent_A', 'Opponent_B', 'Rd1A', 'Rd2A', 'Rd3A', 'Rd4A', 'Rd5A', 'Rd1B', 'Rd2B', 'Rd3B', 'Rd4B', 'Rd5B', 'Rd1C', 'Rd2C', 'Rd3C', 'Rd4C', 
-                         'Rd5C', 'Media_score_ratio_of_agreement', 'Rd1_Fans', 'Rd2_Fans', 'Rd3_Fans', 'Rd4_Fans', 'Rd5_Fans'
+                         'Rd5C', 'Media_score_ratio_of_agreement','Full_Scores', 'Rd1_Fans', 'Rd2_Fans', 'Rd3_Fans', 'Rd4_Fans', 'Rd5_Fans'
                          ])
         for row in rows:
             if(row[18]!='Error_skip'):

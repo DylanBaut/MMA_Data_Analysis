@@ -124,9 +124,7 @@ $(document).ready(function () {
         head2.classList.remove("invalid");
         
         let valid = true;
-        let alert = ''
-        console.log(sigAtt1)
-        
+        let alert = ''        
         if (parseInt(sigAtt1.value) < parseInt(sigLand1.value)) {
             sigAtt1.classList.add("invalid");
             sigLand1.classList.add("invalid");
@@ -134,7 +132,6 @@ $(document).ready(function () {
             valid = false;
         }
         if (parseInt(sigAtt2.value) < parseInt(sigLand2.value)) {
-            console.log(sigAtt2.value < sigLand2.value)
             sigAtt2.classList.add("invalid");
             sigLand2.classList.add("invalid");
             alert = alert + "sig strikes landed more than attempted ; "
@@ -147,7 +144,6 @@ $(document).ready(function () {
             valid = false;
         }
         if (parseInt(sigAtt2.value) < parseInt(head2.value)) {
-            console.log(sigAtt2.value < head2.value)
             sigAtt2.classList.add("invalid");
             head2.classList.add("invalid");
             alert = alert + "sig head strikes landed more than attempted; "
@@ -187,4 +183,12 @@ $(document).ready(function () {
         window.location = base_url
         
     }
+
+    $(document).ready(function () {
+        $('select').selectize({
+        });
+    });
+    var $select = $('#fight-list').selectize();
+    var control = $select[0].selectize;
+    control.clear();
 });

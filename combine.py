@@ -30,7 +30,7 @@ def main():
                         'Round_4_Sig_Strikes_Attempted_(B)','Round_4_Sig_Strikes_Landed_(B)','Round_4_KD_(B)','Round_4_TD_(B)','Round_4_Sub_Attempts_(B)','Round_4_Ctrl_Time_(B)','Round_4_Head_Strikes_(B)',
                         'Round_5_Sig_Strikes_Attempted_(B)','Round_5_Sig_Strikes_Landed_(B)','Round_5_KD_(B)','Round_5_TD_(B)','Round_5_Sub_Attempts_(B)','Round_5_Ctrl_Time_(B)','Round_5_Head_Strikes_(B)',
                         'Decision1','Decision2','Decision3','Winner','Opponent_A_dec', 'Rd1A', 'Rd2A', 'Rd3A', 'Rd4A', 'Rd5A', 'Rd1B', 'Rd2B', 'Rd3B', 'Rd4B', 'Rd5B', 'Rd1C', 'Rd2C', 'Rd3C', 'Rd4C', 
-                         'Rd5C', 'Media score ratio of agreement', 'Rd1 Fans', 'Rd2 Fans', 'Rd3 Fans', 'Rd4 Fans', 'Rd5 Fans'
+                         'Rd5C', 'Media score ratio of agreement','Full_Scores', 'Rd1 Fans', 'Rd2 Fans', 'Rd3 Fans', 'Rd4 Fans', 'Rd5 Fans'
                          ])
         for row in decisions.itertuples(index =True):
             skipped = False

@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, session
 from torch import load, no_grad, tensor, float32
 from torch.nn import Sequential, Linear, ReLU
+from pandas import read_csv
 app = Flask(__name__)
 app.secret_key="jaxb"
 formData ={}
+scores_df = read_csv('static/data/scoresData.csv')
 
 @app.route("/", methods =['POST', 'GET'])
 def index():
@@ -26,8 +28,6 @@ def index():
         formData['ctrl2']=request.form['ctrl2']
         formData['head2']=request.form['head2']
         formData['modelSel']=request.form['modelSel']
-
-
         return redirect(url_for('output'))
     else:
         return render_template("index.html")
@@ -130,7 +130,69 @@ def output():
         return render_template("index.html")
     
 
-@app.route('/fightScorer')
+@app.route('/fightScorer', methods =['POST', 'GET'])
 def fightScorer():
-    print('In fightScorer')
-    return render_template("search.html")
+    flash(len(scores_df), "len")
+    for rowtuple in scores_df.itertuples():
+        row= list(rowtuple)[1:]
+        temp = row[0] + " vs. " + row[1]
+        flash(temp, "fight")
+    if request.method =='POST':
+        formData['fightselect']=request.form['fight-list']
+        formData['modelSel']=request.form['modelSel']
+        return redirect(url_for('searchOutput'))
+    else:
+        return render_template("search.html", len =len(scores_df))
+    
+def get_sec(time_str):
+    m, s = time_str.split(':')
+    return int(m) * 60 + int(s)
+
+@app.route("/searchOutput", methods =['POST', 'GET'])
+def searchOutput():
+    for rowtuple in scores_df.itertuples():
+        row= list(rowtuple)[1:]
+        temp = row[0] + " vs. " + row[1]
+        flash(temp, "fight")
+    row = scores_df.iloc[int(formData['fightselect'])]
+    if(row[24] =="--"):
+        roundNum=3
+    else:
+        roundNum=5
+    results =[]
+    idxA, idxB, idxC, idxD, idxE, idxF, idxG, idxH, idxI, idxJ, idxK, idxL, idxM, idxN = 2,3,4,5,6,7,8,37,38, 39, 40, 41, 42, 43
+    for roundNumber in range(roundNum): 
+        formData['sigAtt1']=row[idxA]
+        formData['sigLand1']=row[idxB]
+        formData['KD1']=row[idxC]
+        formData['TD1']=row[idxD]
+        formData['sub1']=row[idxE]
+        formData['ctrl1']=get_sec(row[idxF])
+        formData['head1']=row[idxG]
+        formData['sigAtt2']=row[idxH]
+        formData['sigLand2']=row[idxI]
+        formData['KD2']=row[idxJ]
+        formData['TD2']=row[idxK]
+        formData['sub2']=row[idxL]
+        formData['ctrl2']=get_sec(row[idxM])
+        formData['head2']=row[idxN]
+        result =get_prediction().tolist()
+        results.append(result)
+        idxA, idxB, idxC, idxD, idxE, idxF, idxG, idxH, idxI, idxJ, idxK, idxL, idxM, idxN = idxA+7, idxB+7, idxC+7, idxD+7, idxE+7, idxF+7, idxG+7, idxH+7, idxI+7, idxJ+7, idxK+7, idxL+7, idxM+7, idxN+7
+    for tier in range(len(results)):
+        result =results[tier]
+        indexMin = result.index(min(result))
+        minVal = result[indexMin]
+        for idx in range(len(result)):
+            result[idx]= result[idx]-minVal
+        sumVal = sum(result)
+        for idx in range(len(result)):
+            result[idx]= round(((result[idx]/sumVal)*100),2)
+            flash(result[idx], tier)
+    print(results)
+    if request.method =='POST':
+        formData['fightselect']=request.form['fight-list']
+        print(formData['fightselect'])
+        return redirect(url_for('searchOutput'))
+    else:
+        return render_template("search2.html",len =len(scores_df), rounds=roundNum)

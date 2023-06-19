@@ -6,7 +6,7 @@
         <meta name="author" content="Dylan Jude Bautista">
         <meta name="newport" content="width=device width, initial scale=1.0">
         <title>MMA Round Judge</title>
-        <link rel="stylesheet" href="{{url_for('static', filename='css/search.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/search2.css')}}">
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="{{url_for('static', filename='idx.js')}}"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -28,9 +28,7 @@
            <p>UFC Fight Scorer</p>
           <p style="font-size: 2vw; line-height: 0%;font-family:'UFCfonthollow'; padding: 5px;">by Dylan Bautista</p>
         </div>
-        <div id="sidebar">
-            <img id="side-image" src="{{url_for('static', filename='Images/Mcgregor.png')}}" alt="Image of Connor Mcgregor"/>
-        </div>
+
         <div class="topbar-nav">
             <span id="roundJudge">Round Judge</span>
             <span id="fightScorer">Fight Scorer</span>
@@ -41,7 +39,7 @@
                     <header class="opptitle"><b>Select Your UFC Fight:</b></header>
                     <div class="options">
                         <label for="fight-list">Choose from historical UFC bouts:</label> <br>
-                        <select name="fight-list" id="fight-list" placeholder="Pick a fight (Most Recent at top)..."> 
+                        <select name="fight-list" id="fight-list" placeholder="Pick a fight (Most Recent at top)..." required> 
                         {%with fights = get_flashed_messages(category_filter=["fight"])%}
                         {% if fights %}
                         {%for idx in range(0, len)%}
@@ -72,6 +70,24 @@
                     </div>        
                 </div>
                 <div class="data" id="opp2">
+                    <div class="result-div1" id="rounds">
+                    {%for x in range(rounds)%}
+                        <header id="results"><b> Round: {{x+1}}</b></header>
+                        {%with percentages = get_flashed_messages(category_filter=[x])%}
+                        {% if percentages %}
+                        {%for percentage in percentages%}
+                            <span>{{percentage}}</span>
+                        {%endfor%}
+                        {% endif %}
+                        {% endwith %}
+                    {%endfor%}
+                    </div>
+                    <div class="result-div">
+
+                    </div>
+                    <div class="result-div">
+
+                    </div>
                 </div>
             </div>
         </form>

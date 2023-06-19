@@ -95,7 +95,10 @@ body{
 }
 #opp2{
     height: 83%;
-    width: 20vw;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    border-left: 6px solid grey;
 }
 .opptitle{
     font-family: 'Playfair Display', serif;
@@ -286,3 +289,17 @@ body{
     right:0;
     opacity: 80%;
 }    
+.result-div1{
+    height: 40%;
+    width: 90%;
+    margin: 1vh;
+}
+.result-div{
+    height: 30%;
+    width: 90%;
+    margin: 1vh;
+}
+#rounds{
+    display: flex;
+    flex-direction: column;
+}
