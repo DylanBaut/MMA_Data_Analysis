@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="{{url_for('static', filename='css/search2.css')}}">
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="{{url_for('static', filename='idx.js')}}"></script>
+        <script src="{{url_for('static', filename='search.js')}}"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
@@ -47,7 +48,60 @@
                         {% endif %}
                         {% endwith %}
                         </select>
-                    </div> 
+                    </div>
+                    <label for="accuracy">Judge Accuracy level:</label>
+                    <div id="accuracyHolder">
+                        <span class="accuracyLabels">Robbery</span>
+                        <span class="accuracyLabels">Probably Wrong</span>
+                        <span class="accuracyLabels" >Close/Hard<br>-Scoring</span>
+                        <span class="accuracyLabels">Good Decision</span>                   
+                        <span class="accuracyLabels">Perfect Decision</span>
+
+                    </div>
+                    {%with accus = get_flashed_messages(category_filter=["accuracy"])%}
+                    {% if accus %}
+                    {%for acc in accus%}
+                    <meter id="accuracy"
+                        min="-0.01" max="1"
+                        low="33" high="66" optimum="80"
+                        value="{{acc}}">
+                        at 50/100
+                    </meter>
+                    {%endfor%}
+                    {% endif %}
+                    {% endwith %}
+                    <div id="scorecards">
+                        <header>Real Judges Scorecards:</header>
+                        {%with opps = get_flashed_messages(category_filter=["opponents"])%}
+                        {% if opps %}
+                        {%for opp in opps%}
+                        <div class="prob">
+                            <span> {{opp}}</span> 
+                        </div>
+                        {%endfor%}
+                        {% endif %}
+                        {% endwith %}
+
+                        {%with scoreList = get_flashed_messages(category_filter=["judging"])%}
+                        {% if scoreList %}
+                        {%for judgeScore in scoreList%}
+                        <div class="prob2">
+                            <span class="judgeScore"> {{judgeScore}}</span> 
+                        </div>
+                        {%endfor%}
+                        {% endif %}
+                        {% endwith %}
+                        {%with winners = get_flashed_messages(category_filter=["winning"])%}
+                        {% if winners %}
+                        {%for win in winners%}
+                        <div class="prob3">
+                            <span class="judgeScore">Actual Winner: {{win}}</span> 
+                        </div>
+                        {%endfor%}
+                        {% endif %}
+                        {% endwith %}
+                    
+                    </div>
                 </div>
                 <div class="middle-section">
                     {%with labels = get_flashed_messages(category_filter=["label"])%}
@@ -66,26 +120,117 @@
                     </div>
                     <div id="explanation-div">
                         <p id="modelJudge" class="desc"> This option uses a neural network model trained with the judging scores for all past scored UFC rounds. It is trained to predict up to an 80 percent accuracy what a judge is most likely to score, not what is necessarily correct.</p>
-                        <p id="modelFans" class="desc">This option uses a neural network model trained with the judging scores for all past scored UFC rounds, with weights linked to the agreement with fan scores on mmadecisions.com site. Therefore, this prediction should be subjectively 'more correct', and thus matches only up to a 76 percent of what a judge is likely to score.</p>        
+                        <p id="modelFans" class="desc">This option uses a neural network model trained with the judging scores for all past scored UFC rounds, with weights linked to the agreement with fan scores on mmadecisions.com site. Therefore, this prediction should be subjectively 'more correct', and thus matches only up to a 77 percent of what a judge is likely to score.</p>        
                     </div>        
                 </div>
                 <div class="data" id="opp2">
                     <div class="result-div1" id="rounds">
                     {%for x in range(rounds)%}
-                        <header id="results"><b> Round: {{x+1}}</b></header>
+                        <header class="results"><b> Round: {{x+1}}</b></header>
+                        <div class="container">
                         {%with percentages = get_flashed_messages(category_filter=[x])%}
                         {% if percentages %}
                         {%for percentage in percentages%}
-                            <span>{{percentage}}</span>
+                            <span class="percentage{{x}}">{{percentage}}</span>
                         {%endfor%}
                         {% endif %}
                         {% endwith %}
+                        </div>
                     {%endfor%}
-                    </div>
-                    <div class="result-div">
+                    {%with paths = get_flashed_messages(category_filter=["path"])%}
+                    {% if paths %}
+                    {%for path in paths%}
+                    <header id="likely">Most Likely Path:</header><span id="path">{{path}}</span>
+                    {%endfor%}
+                    {% endif %}
+                    {% endwith %}
+                    <div id="probabilities">
+                    <header id="paths">Top Likely Paths:</header>
+                        <div class="probabilityRow">
+                            {%with tie = get_flashed_messages(category_filter=["first"])%}
+                            {% if tie %}
+                            {%for message in tie%}
+                            <div class="pair">
+                                <div class="prob">
+                                    <b>1st:</b><span id="path1"> {{message}}</span> 
+                                </div>
+                                <div class="outer-bar">
+                                    <div id="progress1" class="bar"></div>
+                                </div>
+                            </div>
+                            {%endfor%}
+                            {% endif %}
+                            {% endwith %}
+                            {%with aOne = get_flashed_messages(category_filter=["second"])%}
+                            {% if aOne %}
+                            {%for message in aOne%}
+                            <div class="pair">
+                                <div class="prob">
+                                    <b>2nd:</b><span id="path2"> {{message}}</span> 
+                                </div>
+                                <div class="outer-bar">
+                                    <div id="progress2" class="bar"></div>
+                                </div>
+                            </div>
+                            {%endfor%}
+                            {% endif %}
+                            {% endwith %}
+                            {%with aTwo = get_flashed_messages(category_filter=["third"])%}
+                            {% if aTwo %}
+                            {%for message in aTwo%}
+                            <div class="pair">
+                                <div class="prob">
+                                    <b>3rd:</b><span id="path3"> {{message}}</span> 
+                                </div>
+                                <div class="outer-bar">
+                                    <div id="progress3" class="bar"></div>
+                                </div>
+                            </div>
+                            {%endfor%}
+                            {% endif %}
+                            {% endwith %}
+                        </div>
+                        <div class="probabilityRow">
+                            {%with bOne = get_flashed_messages(category_filter=["fourth"])%}
+                            {% if bOne %}
+                            {%for message in bOne%}
+                            <div class="pair">
+                                <div class="prob">
+                                    <b>4th:</b><span id="path4"> {{message}}</span> 
+                                </div>
+                                <div class="outer-bar">
+                                    <div id="progress4" class="bar"></div>
+                                </div>
+                            </div>
+                            {%endfor%}
+                            {% endif %}
+                            {% endwith %}
+                            {%with bTwo = get_flashed_messages(category_filter=["fifth"])%}
+                            {% if bTwo %}
+                            {%for message in bTwo%}
+                            <div class="pair">
+                                <div class="prob">
+                                    <b>5th:</b><span id="path5"> {{message}}</span> 
+                                </div>
+                                <div class="outer-bar">
+                                    <div id="progress5" class="bar"></div>
+                                </div>
+                            </div>
+                            {%endfor%}
+                            {% endif %}
+                            {% endwith %}
+                        </div>
+                        <div class="Dropdown">
+                            <button id="DropDown-Button">Disclaimer: although percentages are representative of outputs generated by NN model, the numerical values...[Hover for more]</button>
+                                <div class="Dropdown-Menu">
+                                <p id="Disclaimer">Disclaimer: although percentages are representative of outputs generated by NN model, the numerical values
+                                        are not indicative of actual probabilities. Due to this nature, for "Top Likely Paths" probabilities for common paths that
+                                     lead to same scorecard are not added together; only highest probability path is shown to compare with other scorecards' highest
+                                    for most "true to life" representation.</p>
+                                </div>        
 
-                    </div>
-                    <div class="result-div">
+                    </div>  
+
 
                     </div>
                 </div>

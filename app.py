@@ -179,20 +179,263 @@ def searchOutput():
         result =get_prediction().tolist()
         results.append(result)
         idxA, idxB, idxC, idxD, idxE, idxF, idxG, idxH, idxI, idxJ, idxK, idxL, idxM, idxN = idxA+7, idxB+7, idxC+7, idxD+7, idxE+7, idxF+7, idxG+7, idxH+7, idxI+7, idxJ+7, idxK+7, idxL+7, idxM+7, idxN+7
+    scoreCard =[0,0]
+    percentages = []
     for tier in range(len(results)):
         result =results[tier]
+        indexMax = result.index(max(result))
+        match indexMax:
+                case 0:
+                    scoreCard[0] = scoreCard[0]+10
+                    scoreCard[1] = scoreCard[1]+10
+                case 1:
+                    scoreCard[0] = scoreCard[0]+10
+                    scoreCard[1] = scoreCard[1]+9
+                case 2:
+                    scoreCard[0] = scoreCard[0]+10
+                    scoreCard[1] = scoreCard[1]+8
+                case 3:
+                    scoreCard[0] = scoreCard[0]+9
+                    scoreCard[1] = scoreCard[1]+10
+                case 4:
+                    scoreCard[0] = scoreCard[0]+8
+                    scoreCard[1] = scoreCard[1]+10
         indexMin = result.index(min(result))
         minVal = result[indexMin]
         for idx in range(len(result)):
             result[idx]= result[idx]-minVal
         sumVal = sum(result)
+        percentagesDict = {}
         for idx in range(len(result)):
             result[idx]= round(((result[idx]/sumVal)*100),2)
-            flash(result[idx], tier)
-    print(results)
+            match idx:
+                case 0:
+                    scoreVal = '10-10'
+                    percentagesDict["0"]= result[idx]
+                case 1:
+                    scoreVal = '10-9 OppA'
+                    percentagesDict["1"]= result[idx]
+                case 2:
+                    scoreVal = '10-8 OppA'
+                    percentagesDict["2"]= result[idx]
+                case 3:
+                    scoreVal = '10-9 OppB'
+                    percentagesDict["3"]= result[idx]
+                case 4:
+                    scoreVal = '10-8 OppB'
+                    percentagesDict["4"]= result[idx]
+
+            flash(scoreVal+": "+str(result[idx])+"%", tier)
+        percentages.append(percentagesDict)
+    tempList=[]
+    for percentage in percentages:
+        tempList.append(dict(sorted(percentage.items(), key=lambda x:x[1])[2:]))
+    cards = {}
+    rd1=tempList[0]
+    rd2=tempList[1]
+    rd3=tempList[2]
+    if(roundNum==5):
+        rd4=tempList[3]
+        rd5=tempList[4]
+    for idx1 in rd1:
+        oppScores = [0,0]
+        prob = 1
+        prob =prob*(float(rd1[idx1])/100)
+        match int(idx1):
+            case 0:
+                oppScores[0] = oppScores[0]+10
+                oppScores[1] = oppScores[1]+10
+            case 1:
+                oppScores[0] = oppScores[0]+10
+                oppScores[1] = oppScores[1]+9
+            case 2:
+                oppScores[0] = oppScores[0]+10
+                oppScores[1] = oppScores[1]+8
+            case 3:
+                oppScores[0] = oppScores[0]+9
+                oppScores[1] = oppScores[1]+10
+            case 4:
+                oppScores[0] = oppScores[0]+8
+                oppScores[1] = oppScores[1]+10
+        for idx2 in rd2:
+            oppScores2 = oppScores.copy()
+            prob2 = prob
+            prob2 =prob2*(float(rd2[idx2])/100)
+            match int(idx2):
+                case 0:
+                    oppScores2[0] = oppScores2[0]+10
+                    oppScores2[1] = oppScores2[1]+10
+                case 1:
+                    oppScores2[0] = oppScores2[0]+10
+                    oppScores2[1] = oppScores2[1]+9
+                case 2:
+                    oppScores2[0] = oppScores2[0]+10
+                    oppScores2[1] = oppScores2[1]+8
+                case 3:
+                    oppScores2[0] = oppScores2[0]+9
+                    oppScores2[1] = oppScores2[1]+10
+                case 4:
+                    oppScores2[0] = oppScores2[0]+8
+                    oppScores2[1] = oppScores2[1]+10
+            for idx3 in rd3:
+                oppScores3 = oppScores2.copy()
+                prob3 = prob2
+                prob3 =prob3*(float(rd3[idx3])/100)
+                match int(idx3):
+                    case 0:
+                        oppScores3[0] = oppScores3[0]+10
+                        oppScores3[1] = oppScores3[1]+10
+                    case 1:
+                        oppScores3[0] = oppScores3[0]+10
+                        oppScores3[1] = oppScores3[1]+9
+                    case 2:
+                        oppScores3[0] = oppScores3[0]+10
+                        oppScores3[1] = oppScores3[1]+8
+                    case 3:
+                        oppScores3[0] = oppScores3[0]+9
+                        oppScores3[1] = oppScores3[1]+10
+                    case 4:
+                        oppScores3[0] = oppScores3[0]+8
+                        oppScores3[1] = oppScores3[1]+10
+                if(roundNum ==3):
+                    key = str(str(oppScores3[0])+"-"+str(oppScores3[1]))
+                    if(key in cards):
+                        if( prob3 > float(cards[key])):
+                            cards[key] = prob3
+                    else:
+                        cards[key] = prob3
+                else:
+                    for idx4 in rd4:
+                        oppScores4 = oppScores3.copy()
+                        prob4 = prob3
+                        prob4 =prob4*(float(rd4[idx4])/100)
+                        match int(idx4):
+                            case 0:
+                                oppScores4[0] = oppScores4[0]+10
+                                oppScores4[1] = oppScores4[1]+10
+                            case 1:
+                                oppScores4[0] = oppScores4[0]+10
+                                oppScores4[1] = oppScores4[1]+9
+                            case 2:
+                                oppScores4[0] = oppScores4[0]+10
+                                oppScores4[1] = oppScores4[1]+8
+                            case 3:
+                                oppScores4[0] = oppScores4[0]+9
+                                oppScores4[1] = oppScores4[1]+10
+                            case 4:
+                                oppScores4[0] = oppScores4[0]+8
+                                oppScores4[1] = oppScores4[1]+10
+                        for idx5 in rd5:
+                            oppScores5 = oppScores4.copy()
+                            prob5 = prob4
+                            prob5 =prob5*(float(rd5[idx5])/100)
+                            match int(idx5):
+                                case 0:
+                                    oppScores5[0] = oppScores5[0]+10
+                                    oppScores5[1] = oppScores5[1]+10
+                                case 1:
+                                    oppScores5[0] = oppScores5[0]+10
+                                    oppScores5[1] = oppScores5[1]+9
+                                case 2:
+                                    oppScores5[0] = oppScores5[0]+10
+                                    oppScores5[1] = oppScores5[1]+8
+                                case 3:
+                                    oppScores5[0] = oppScores5[0]+9
+                                    oppScores5[1] = oppScores5[1]+10
+                                case 4:
+                                    oppScores5[0] = oppScores5[0]+8
+                                    oppScores5[1] = oppScores5[1]+10
+                            key = str(str(oppScores5[0])+"-"+str(oppScores5[1]))
+                            if(key in cards):
+                                if( prob5 > float(cards[key])):
+                                    cards[key] = prob5
+                            else:
+                                cards[key] = prob5
+    cards = dict(sorted(cards.items(), key=lambda x:x[1])[-5:])
+    labels =["fifth","fourth","third","second","first"]
+    labelIdx=0
+    total=0
+    for key in cards:
+        flash(key +" "+ str(round((cards[key]*100),3))+"%",labels[labelIdx])
+        total+=cards[key]
+        labelIdx+=1
+    for key in cards:
+        cards[key] =cards[key]/total
+    decs = [str(row[72])+"-"+str(row[73]), str(row[74])+"-"+str(row[75]), str(row[76])+"-"+str(row[77])]
+    mean =0
+    keyScores = list(cards.keys())
+    flash("Opponent A ("+row[0]+") vs. Opponent B ("+row[1]+")", "opponents")
+    tiebraker =0
+    ties =0
+    for dec in decs:
+        nums =dec.split("-")
+        if(nums[0]>nums[1]):
+            tiebraker-=1
+        elif(nums[1]>nums[0]):
+            tiebraker+=1
+        else:
+            ties +=1
+        flash(dec,"judging")
+        if(dec in cards):
+            foundidx = keyScores.index(dec)
+            match foundidx:
+                case 0:
+                    mean += cards[dec]*0.56
+                case 1:
+                    mean += cards[dec]*0.66
+                case 2:
+                    mean += cards[dec]
+                case 3:
+                    mean += cards[dec]*1.1
+                case 4:
+                    mean += cards[dec]*1.2
+        else:
+            mean += (cards[keyScores[0]]/4)
+            print("no match")
+    if(ties >=2):
+        flash("Tie", "winning")
+    elif(tiebraker>0):
+        flash(row[1], "winning")
+    elif(tiebraker<0):
+        flash(row[0], "winning")
+    else:
+        flash("Tie", "winning")
+    mean=mean/3
+    print(mean)
+    accurLevel = mean *3.65
+    flash(accurLevel, "accuracy")
+    if(scoreCard[0]>scoreCard[1]):
+        winner =row[0]
+    else:
+        winner =row[1]
+    flash(str(scoreCard[0])+" - "+str(scoreCard[1]) +" "+winner, "path")
     if request.method =='POST':
         formData['fightselect']=request.form['fight-list']
-        print(formData['fightselect'])
         return redirect(url_for('searchOutput'))
     else:
         return render_template("search2.html",len =len(scores_df), rounds=roundNum)
+    
+    '''    
+   
+    if(roundNum==3):
+        oppScores = [0,0]
+        for idx1 in range(3):
+            match idx1:
+                case 0:
+                    scoreVal = '10-10'
+                case 1:
+                    scoreVal = '10-9 OppA'
+                case 2:
+                    scoreVal = '10-8 OppA'
+                case 3:
+                    scoreVal = '10-9 OppB'
+                case 4:
+                    scoreVal = '10-8 OppB'
+            for idx2 in range(3):
+                for idx3 in range(3):
+                    key = str(oppScores[0]+" "+oppScores[1])
+                    if(cards.has_key(key)):
+                           cards[key] += tempList[0][idx1]*tempList[1][idx2]*tempList[2][idx3]
+                    else:
+                        cards[key] = tempList[0][idx1]*tempList[1][idx2]*tempList[2][idx3]
+'''

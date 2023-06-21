@@ -33,6 +33,7 @@ for rowtuple in output_df.itertuples():
     rowList.extend(roundinfoB)
     if(row[80]=='DRAW'):
         # if Opponent A of UFC is Opponent A in decisions
+        nums = re.findall(r'\d+',decisions)
         if(SequenceMatcher(a=unidecode(row[81]).lower(), b=unidecode(row[3]).lower()).ratio() >=0.8):
             rowList.append(nums[0])
             rowList.append(nums[1])

@@ -7,7 +7,7 @@ $(document).ready(function () {
         $("p.desc").hide();
         $("#model" + test).show();
     });
-
+    
     var perc1 = $("#prog1").text()
     var lim1 = perc1.substring(0, perc1.length - 1);
     if (lim1 != undefined) {
@@ -191,4 +191,99 @@ $(document).ready(function () {
     var $select = $('#fight-list').selectize();
     var control = $select[0].selectize;
     control.clear();
+    
+    var max = -Infinity;
+    var maxEle = $(".percentage0").each(function () {
+        var temp = this.innerHTML.split(":")[1]
+        var val = temp.substring(0, temp.length-1)
+        if (+val > max) {
+            max = +val;
+        } 
+    }).filter(function () {
+        var temp = this.innerHTML.split(":")[1]
+        var val = temp.substring(0, temp.length-1)
+        return val == max;
+    });
+
+    if (maxEle.length > 1) maxEle = maxEle.eq(Math.floor(Math.random() * maxEle.length));
+    maxEle.css("border-color", "yellow");
+    maxEle.css("border-width", "2px");
+    maxEle.css("font-weight", "bold");
+
+    var max = -Infinity;
+    var maxEle = $(".percentage1").each(function () {
+        var temp = this.innerHTML.split(":")[1]
+        var val = temp.substring(0, temp.length-1)
+        if (+val > max) {
+            max = +val;
+        } 
+    }).filter(function () {
+        var temp = this.innerHTML.split(":")[1]
+        var val = temp.substring(0, temp.length-1)
+        return val == max;
+    });
+
+    if (maxEle.length > 1) maxEle = maxEle.eq(Math.floor(Math.random() * maxEle.length));
+    maxEle.css("border-color", "yellow");
+    maxEle.css("border-width", "2px");
+    maxEle.css("font-weight", "bold");
+
+    var max = -Infinity;
+    var maxEle = $(".percentage2").each(function () {
+        var temp = this.innerHTML.split(":")[1]
+        var val = temp.substring(0, temp.length-1)
+        if (+val > max) {
+            max = +val;
+        } 
+    }).filter(function () {
+        var temp = this.innerHTML.split(":")[1]
+        var val = temp.substring(0, temp.length-1)
+        return val == max;
+    });
+
+    if (maxEle.length > 1) maxEle = maxEle.eq(Math.floor(Math.random() * maxEle.length));
+    maxEle.css("border-color", "yellow");
+    maxEle.css("border-width", "2px");
+    maxEle.css("font-weight", "bold");
+
+    var max = -Infinity;
+    var maxEle = $(".percentage3").each(function () {
+        var temp = this.innerHTML.split(":")[1]
+        var val = temp.substring(0, temp.length-1)
+        if (+val > max) {
+            max = +val;
+        } 
+    }).filter(function () {
+        var temp = this.innerHTML.split(":")[1]
+        var val = temp.substring(0, temp.length-1)
+        return val == max;
+    });
+
+    if (maxEle.length > 1) maxEle = maxEle.eq(Math.floor(Math.random() * maxEle.length));
+    maxEle.css("border-color", "yellow");
+    maxEle.css("border-width", "2px");
+    maxEle.css("font-weight", "bold");
+
+    var max = -Infinity;
+    var maxEle = $(".percentage4").each(function () {
+        var temp = this.innerHTML.split(":")[1]
+        var val = temp.substring(0, temp.length-1)
+        if (+val > max) {
+            max = +val;
+        } 
+    }).filter(function () {
+        var temp = this.innerHTML.split(":")[1]
+        var val = temp.substring(0, temp.length-1)
+        return val == max;
+    });
+
+    if (maxEle.length > 1) maxEle = maxEle.eq(Math.floor(Math.random() * maxEle.length));
+    maxEle.css("border-color", "yellow");
+    maxEle.css("border-width", "2px");
+    maxEle.css("font-weight", "bold");
+
+
+    
+    
+
 });

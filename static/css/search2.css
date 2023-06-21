@@ -87,19 +87,33 @@ body{
     border-right: 6px solid grey;
     padding-right: 10px;
     width: 30%;
-    height: 83%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
 }
 #opp2{
-    height: 83%;
+    height: 90%;
+    align-self: self-start;
     width: 30%;
     display: flex;
     flex-direction: column;
-    border-left: 6px solid grey;
+    justify-content: flex-start;
+    margin-top: 0%;
+    margin-bottom: 0%;
 }
+.middle-section::before {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 100%;
+    bottom: -1vh;
+    right: 36vw;
+    background-color: grey;
+    -webkit-transform: scaleY(0.65);
+    transform: scaleY(0.65);
+  }
 .opptitle{
     font-family: 'Playfair Display', serif;
     width: 100%;
@@ -117,13 +131,11 @@ body{
     padding: 2%;
 
 }
-#results{
-    display: flex;
-    flex-direction: column;
-    vertical-align: top;    
+.results{
     font-family: 'Playfair Display', serif;
-    font-size: 2vw;
-    align-items: center;
+    font-size: 1.5vw;
+    align-self: center;
+    margin-top: 2%;
 }
 .middle-section{
     align-self: self-start;
@@ -203,7 +215,7 @@ body{
   }
   .prob{
     background-color: lightgrey;
-    margin: 5px;
+    margin: 7px;
     box-shadow: 3px 3px darkslategray;
     padding: 2px;  
 }
@@ -218,7 +230,7 @@ body{
 }
 .outer-bar{
     width: 50px;
-    height: 50%;
+    height: 25px;
     background-color: lightgrey;
     vertical-align:middle;
 }
@@ -302,4 +314,133 @@ body{
 #rounds{
     display: flex;
     flex-direction: column;
+}
+.percentage0{
+    background-color: lightgrey;
+    font-size: 0.8vw;
+    max-width: 20%;
+    padding-left:1%;
+    border: 1px solid;
+    border-color: black;
+}
+.percentage1{
+    background-color: lightgrey;
+    font-size: 0.8vw;
+    max-width: 20%;
+    padding-left:1%;
+    border: 1px solid black;
+
+}
+.percentage2{
+    background-color: lightgrey;
+    font-size: 0.8vw;
+    max-width: 20%;
+    padding-left:1%;
+    border: 1px solid black;
+
+}
+.percentage3{
+    background-color: lightgrey;
+    font-size: 0.8vw;
+    max-width: 20%;
+    padding-left:1%;
+    border: 1px solid black;
+
+}
+.percentage4{
+    background-color: lightgrey;
+    font-size: 0.8vw;
+    max-width: 20%;
+    padding-left:1%;
+    border: 1px solid black;
+
+}
+.container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: 1vw;
+    margin-left: 0;
+
+}
+#likely{
+    display: inline-block;
+}
+#paths{
+    margin-top: 2.5vh;
+    text-align: center;
+}
+#path{
+    font-weight: bold;
+}
+#disclaimer{
+ font-size: 0.3 vh;
+}
+
+.Dropdown {
+    display: block;
+}
+#DropDown-Button {
+    margin-top: 1.2vh;
+    position: relative; 
+    display: block;
+    font-size: 1.1vh;
+}
+
+.Dropdown-Menu {
+    display: none;
+    background-color: lightgrey;
+    margin-top: 10px;
+    position: relative;
+    font-size: 1.2vh;
+
+}
+
+.Dropdown:hover .Dropdown-Menu{
+    display: block;
+}
+#accuracy{
+    width: 95%;
+    height:7vh;
+}
+.accuracyLabels{
+    font-size: 0.7vw;
+    margin: 0;
+}
+#accuracyHolder{
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 0;
+    margin-top: 0.5vh;
+    padding-right: 0;
+
+}
+.prob2{
+    background-color: lightgrey;
+    margin: 5px;
+    box-shadow: 3px 3px darkslategray;
+    padding: 2px;  
+    width: 30%;
+    text-align: center;
+    font-weight: bold;
+
+}
+.prob3{
+    background-color: lightgrey;
+    margin: 5px;
+    box-shadow: 3px 3px darkslategray;
+    padding: 2px;  
+    width: 40%;
+    text-align: center;
+    font-weight: bold;
+}
+#scorecards{
+text-align: center;
+align-items: center;
+display: flex;
+flex-direction: column;
 }
