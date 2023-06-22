@@ -2,3 +2,4 @@
 Flask==2.3.2
 pandas==2.0.1
 torch==2.0.+cpu
+gunicorn==20.0.4
