@@ -403,6 +403,7 @@ body{
 #accuracy{
     width: 95%;
     height:7vh;
+    min-height: 2.5vh;
 }
 .accuracyLabels{
     font-size: 0.7vw;
