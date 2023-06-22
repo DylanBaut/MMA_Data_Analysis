@@ -1,10 +1,10 @@
 pandas==2.0.1
 Flask==2.3.2
 pytorch-ignite==0.4.12
-torch-load==2.0.1
-torch-no_grad==2.0.1
-torch-tensor==2.0.1
-torch-float32==2.0.1
+torch-load
+torch-no_grad
+torch-tensor
+torch-float32
 torch-optim==0.0.4
 torch-pruning==1.1.8
 torchaudio==2.0.2
