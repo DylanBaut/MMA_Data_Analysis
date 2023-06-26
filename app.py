@@ -2,16 +2,21 @@ from flask import Flask, render_template, request, flash, redirect, url_for, ses
 from torch import load, no_grad, tensor, float32
 from torch.nn import Sequential, Linear, ReLU
 from pandas import read_csv
+from flask_session import Session
+
 app = Flask(__name__)
 app.secret_key="jaxb"
 formData ={}
 scores_df = read_csv('static/data/scoresData.csv')
+SESSION_TYPE = 'filesystem'
+app.config.from_object(__name__)
+Session(app)
 
 @app.route("/", methods =['POST', 'GET'])
 def index():
     flash("Enter Round", "label")
     flash("Information", "label")
-
+    
     if request.method =='POST':
         formData['sigAtt1']=request.form['sigAtt1']
         formData['sigLand1']=request.form['sigLand1']
@@ -133,10 +138,12 @@ def output():
 @app.route('/fightScorer', methods =['POST', 'GET'])
 def fightScorer():
     flash(len(scores_df), "len")
+    countVar =0
     for rowtuple in scores_df.itertuples():
         row= list(rowtuple)[1:]
         temp = row[0] + " vs. " + row[1]
-        flash(temp, "fight")
+        session[countVar] = temp
+        countVar+=1
     if request.method =='POST':
         formData['fightselect']=request.form['fight-list']
         formData['modelSel']=request.form['modelSel']
@@ -150,10 +157,12 @@ def get_sec(time_str):
 
 @app.route("/searchOutput", methods =['POST', 'GET'])
 def searchOutput():
+    countVar =0
     for rowtuple in scores_df.itertuples():
         row= list(rowtuple)[1:]
         temp = row[0] + " vs. " + row[1]
-        flash(temp, "fight")
+        session[countVar] = temp
+        countVar+=1
     row = scores_df.iloc[int(formData['fightselect'])]
     if(row[24] =="--"):
         roundNum=3
@@ -415,27 +424,3 @@ def searchOutput():
     else:
         return render_template("search2.html",len =len(scores_df), rounds=roundNum)
     
-    '''    
-   
-    if(roundNum==3):
-        oppScores = [0,0]
-        for idx1 in range(3):
-            match idx1:
-                case 0:
-                    scoreVal = '10-10'
-                case 1:
-                    scoreVal = '10-9 OppA'
-                case 2:
-                    scoreVal = '10-8 OppA'
-                case 3:
-                    scoreVal = '10-9 OppB'
-                case 4:
-                    scoreVal = '10-8 OppB'
-            for idx2 in range(3):
-                for idx3 in range(3):
-                    key = str(oppScores[0]+" "+oppScores[1])
-                    if(cards.has_key(key)):
-                           cards[key] += tempList[0][idx1]*tempList[1][idx2]*tempList[2][idx3]
-                    else:
-                        cards[key] = tempList[0][idx1]*tempList[1][idx2]*tempList[2][idx3]
-'''

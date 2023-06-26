@@ -1,4 +1,8 @@
+
 $(document).ready(function () {
+
+
+
     $("p.desc").hide();
     $("#modelJudge").show();
 
@@ -283,7 +287,27 @@ $(document).ready(function () {
     maxEle.css("font-weight", "bold");
 
 
+    function csvToArray(str, delimiter = ",") {
+        var fightList = document.getElementById('fight-list')
+        let array = str.split('\n')
+        let i = 0
+        array.slice(1, -1).forEach(element => {
+            let bout = element.split(',')
+            let label = bout[0] + " vs. " + bout[1]
+            fightList.selectize.addOption({ value: String(i), text: String(label)});
+            /*var opt = document.createElement('option');
+            opt.value = String(i);
+            opt.text = String(label);
+            fightList.add(opt);
+            */
+            console.log(label)
+            i++
+        });
+    }
     
-    
+
+    fetch('static/data/scoresData.csv')
+        .then(response => response.text())
+        .then(text => csvToArray(text))
 
 });

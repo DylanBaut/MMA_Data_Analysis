@@ -42,12 +42,6 @@
                     <div class="options">
                         <label for="fight-list">Choose from historical UFC bouts:</label> <br>
                         <select name="fight-list" id="fight-list" placeholder="Pick a fight (Most Recent at top)..."> 
-                        {%with fights = get_flashed_messages(category_filter=["fight"])%}
-                        {% if fights %}
-                        {%for idx in range(0, len)%}
-                            <option value={{idx}}>{{fights[idx]}}</option>                         {%endfor%}
-                        {% endif %}
-                        {% endwith %}
                         </select>
                     </div> 
                 </div>
