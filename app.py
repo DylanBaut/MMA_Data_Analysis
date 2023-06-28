@@ -2,15 +2,11 @@ from flask import Flask, render_template, request, flash, redirect, url_for, ses
 from torch import load, no_grad, tensor, float32
 from torch.nn import Sequential, Linear, ReLU
 from pandas import read_csv
-from flask_session import Session
 
 app = Flask(__name__)
 app.secret_key="jaxb"
 formData ={}
 scores_df = read_csv('static/data/scoresData.csv')
-SESSION_TYPE = 'filesystem'
-app.config.from_object(__name__)
-Session(app)
 
 @app.route("/", methods =['POST', 'GET'])
 def index():
@@ -158,11 +154,6 @@ def get_sec(time_str):
 @app.route("/searchOutput", methods =['POST', 'GET'])
 def searchOutput():
     countVar =0
-    for rowtuple in scores_df.itertuples():
-        row= list(rowtuple)[1:]
-        temp = row[0] + " vs. " + row[1]
-        session[countVar] = temp
-        countVar+=1
     row = scores_df.iloc[int(formData['fightselect'])]
     if(row[24] =="--"):
         roundNum=3
