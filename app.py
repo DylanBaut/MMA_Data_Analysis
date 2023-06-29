@@ -134,12 +134,6 @@ def output():
 @app.route('/fightScorer', methods =['POST', 'GET'])
 def fightScorer():
     flash(len(scores_df), "len")
-    countVar =0
-    for rowtuple in scores_df.itertuples():
-        row= list(rowtuple)[1:]
-        temp = row[0] + " vs. " + row[1]
-        session[countVar] = temp
-        countVar+=1
     if request.method =='POST':
         formData['fightselect']=request.form['fight-list']
         formData['modelSel']=request.form['modelSel']
@@ -153,7 +147,6 @@ def get_sec(time_str):
 
 @app.route("/searchOutput", methods =['POST', 'GET'])
 def searchOutput():
-    countVar =0
     row = scores_df.iloc[int(formData['fightselect'])]
     if(row[24] =="--"):
         roundNum=3

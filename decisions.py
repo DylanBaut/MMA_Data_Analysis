@@ -5,7 +5,6 @@ import multiprocessing
 import time
 from multiprocessing import Pool 
 import csv
-from concurrent.futures import ThreadPoolExecutor
 
 def get_second_num(raw):
     new = raw.text.split()

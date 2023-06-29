@@ -297,7 +297,6 @@ $(document).ready(function () {
         var fightList = document.getElementById('fight-list')
         let array = str.split('\n')
         let i = 0
-    
         array.slice(1, -1).forEach(element => {
             let bout = element.split(',')
             let label = bout[0] + " vs. " + bout[1]
