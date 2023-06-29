@@ -147,9 +147,11 @@ def get_sec(time_str):
 
 @app.route("/searchOutput", methods =['POST', 'GET'])
 def searchOutput():
-    row=0
+    row=scores_df.iloc[0]
     if('fightselect' in formData):
         row = scores_df.iloc[int(formData['fightselect'])]
+    else:
+        flash("CHOICE WAS NOT RECIEVED, TRY CHOOSING AGAIN.", "opponents")
     session.pop('_flashes', None)
     if(row[24] =="--"):
         roundNum=3
