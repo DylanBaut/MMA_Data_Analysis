@@ -287,13 +287,13 @@ $(document).ready(function () {
     maxEle.css("font-weight", "bold");
 
     function csvToArray(str, delimiter = ",") {
-       
         var $select = $('#fight-list').selectize({
-            maxOptions: 3000,
-            maxItems: 3000,
+            maxOptions: 500,
+            maxItems: 500,
         })
-        var selectize = $select[0].selectize
 
+        var selectizeO = $select[0].selectize
+        
         var fightList = document.getElementById('fight-list')
         let array = str.split('\n')
         let i = 0
@@ -301,19 +301,13 @@ $(document).ready(function () {
         array.slice(1, -1).forEach(element => {
             let bout = element.split(',')
             let label = bout[0] + " vs. " + bout[1]
-            selectize.addOption({ value: String(i), text: String(label)});
+            selectizeO.addOption({ value: String(i), text: String(label)});
             i++
         });
     }
     
 
     fetch('static/data/scoresData.csv')
-        .then(
-            $('#fight-list').selectize({
-            maxOptions: 3000,
-            maxItems: 3000,
-            })
-        )
         .then(response => response.text())
         .then(text => csvToArray(text))
 
