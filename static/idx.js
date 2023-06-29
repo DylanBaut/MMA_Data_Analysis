@@ -187,14 +187,6 @@ $(document).ready(function () {
         window.location = base_url
         
     }
-
-    $(document).ready(function () {
-        $('select').selectize({
-        });
-    });
-    var $select = $('#fight-list').selectize();
-    var control = $select[0].selectize;
-    control.clear();
     
     var max = -Infinity;
     var maxEle = $(".percentage0").each(function () {
@@ -286,15 +278,16 @@ $(document).ready(function () {
     maxEle.css("border-width", "2px");
     maxEle.css("font-weight", "bold");
 
+
+
     function csvToArray(str, delimiter = ",") {
         var $select = $('#fight-list').selectize({
-            maxOptions: 500,
-            maxItems: 500,
+            maxOptions: null,
+            maxItems: 1,
         })
 
         var selectizeO = $select[0].selectize
         
-        var fightList = document.getElementById('fight-list')
         let array = str.split('\n')
         let i = 0
         array.slice(1, -1).forEach(element => {

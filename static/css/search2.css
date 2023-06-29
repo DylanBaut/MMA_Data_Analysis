@@ -386,6 +386,7 @@ body{
     position: relative; 
     display: block;
     font-size: 1.1vh;
+    pointer-events: none;
 }
 
 .Dropdown-Menu {

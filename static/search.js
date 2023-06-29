@@ -115,13 +115,12 @@ $(document).ready(function () {
 
     function csvToArray(str, delimiter = ",") {
         var $select = $('#fight-list').selectize({
-            maxOptions: 500,
-            maxItems: 500,
+            maxOptions: null,
+            maxItems: 1,
         })
 
         var selectizeO = $select[0].selectize
         
-        var fightList = document.getElementById('fight-list')
         let array = str.split('\n')
         let i = 0
         array.slice(1, -1).forEach(element => {
