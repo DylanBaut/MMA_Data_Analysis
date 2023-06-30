@@ -410,6 +410,7 @@ def searchOutput():
     flash(str(scoreCard[0])+" - "+str(scoreCard[1]) +" "+winner, "path")
     if request.method =='POST':
         formData['fightselect']=request.form['fight-list']
+        formData['modelSel']=request.form['modelSel']
         return redirect(url_for('searchOutput'))
     else:
         return render_template("search2.html",len =len(scores_df), rounds=roundNum)
