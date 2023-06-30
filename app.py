@@ -152,7 +152,7 @@ def searchOutput():
     if('fightselect' in formData and 'modelSel' in formData):
         row = scores_df.iloc[int(formData['fightselect'])]
     else:
-        flash("CHOICE WAS NOT RECIEVED, TRY CHOOSING AGAIN.", "opponents")
+        flash("CHOICE WAS NOT RECIEVED, TRY REFRESHING/CHOOSING AGAIN.", "opponentFail")
         formData['modelSel']="Judge"
     if(row[24] =="--"):
         roundNum=3

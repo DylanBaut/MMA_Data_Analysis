@@ -446,3 +446,7 @@ align-items: center;
 display: flex;
 flex-direction: column;
 }
+#fail{
+    font-weight: bold;
+    color: red;
+}
