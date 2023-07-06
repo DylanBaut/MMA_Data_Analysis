@@ -3,7 +3,14 @@
 WEB APP LINK: 
 https://mma-round-judge.herokuapp.com/
 
+#Demo:
+Round Judge
 ![image](https://github.com/DylanBaut/MMA_Data_Analysis/assets/70183425/5ff869fa-91e5-42c3-a7b9-2321ff97374b)
+
+Fight Scorer
+<img width="1615" alt="Screen Shot 2023-07-06 at 3 47 41 PM" src="https://github.com/DylanBaut/MMA_Data_Analysis/assets/70183425/f8605bd8-a4b2-4baa-9ab5-72adee33c870">
+
+<img width="1618" alt="Screen Shot 2023-07-06 at 3 47 18 PM" src="https://github.com/DylanBaut/MMA_Data_Analysis/assets/70183425/7978b093-9380-4c76-8a69-4adc6c784d69">
 
 '''One of the most contentious and seemingly arbitrary aspects of the sport of mixed martial arts is judging decisions. If you're not familiar, every fight is either 3 or 5 rounds, and if a finish isnt achieved within the time limit, 3 judges will have judged each individual round. Each round is based off of a 10 point must system, awarding the chosen winner 10 and the loser less than 10.
 
